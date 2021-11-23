@@ -1,0 +1,96 @@
+<mat-card color="primary" class="form">
+    <mat-card-title style="text-align: center;">Add User</mat-card-title>
+    <form class="form" (ngSubmit)="doSubmitForm()">
+        <div class="inputDiv">
+            <mat-form-field appearance="outline">
+                <mat-label>Email</mat-label>
+                <input type="email" matInput placeholder="Email" name="email" [(ngModel)]="user.email">
+              </mat-form-field>
+              <span *ngIf="errors.email!='' && errors.email!=undefined" style="color: red; font-size: 11px;">Please Enter Valid Email</span>
+              <br>
+    
+        <mat-form-field appearance="outline">
+            <mat-label>First Name</mat-label>
+            <input name="first_name" matInput placeholder="First Name" [(ngModel)]="user.first_name">
+          </mat-form-field>
+          <span *ngIf="errors.first_name!='' && errors.first_name!=undefined" style="color: red; font-size: 11px;">Please Enter Valid First Name</span>
+          <br>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Middle Name</mat-label>
+            <input name="middle_name" matInput placeholder="Middle Name" [(ngModel)]="user.middle_name">
+          </mat-form-field>
+          <span *ngIf="errors.middle_name!='' && errors.middle_name!=undefined" style="color: red; font-size: 11px;">Please Enter Valid Middle Name</span>
+          <br>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Last Name</mat-label>
+            <input name="last_name" matInput placeholder="Last Name" [(ngModel)]="user.last_name">
+          </mat-form-field>
+          <span *ngIf="errors.last_name!='' && errors.last_name!=undefined" style="color: red; font-size: 11px;">Please Enter Valid Last Name</span>
+          <br>
+          <div class="radioDiv">
+            <mat-radio-group name="gender" [(ngModel)]="user.gender">
+              <label>Gender</label>&nbsp;
+              <mat-radio-button value="male" >Male</mat-radio-button>&nbsp;
+              <mat-radio-button value="female">Female</mat-radio-button>
+            </mat-radio-group>
+          </div>
+          <span *ngIf="errors.gender!='' && errors.gender!=undefined" style="color: red; font-size: 11px;">Please Select Gender</span>
+
+        <br>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Date of Birth</mat-label>
+          <input name="dob" matInput placeholder="Dob" type="date" [(ngModel)]="user.dob">
+        </mat-form-field>
+        <span *ngIf="errors.dob!='' && errors.dob!=undefined" style="color: red; font-size: 11px;">Select Valid Date of Birth</span>
+          <br>
+          <mat-form-field appearance="outline">
+            <mat-label>Phone</mat-label>
+            <input name="mobile_no" matInput placeholder="Phone" [(ngModel)]="user.mobile_no">
+          </mat-form-field>
+          <span *ngIf="errors.mobile_no!='' && errors.mobile_no!=undefined" style="color: red; font-size: 11px;">Please Enter Valid Mobile No.</span>
+          <br>
+
+          <mat-form-field appearance="outline">
+            <mat-label>City</mat-label>
+            <input name="city" matInput placeholder="City" [(ngModel)]="user.city">
+          </mat-form-field>
+          <span *ngIf="errors.city!='' && errors.city!=undefined" style="color: red; font-size: 11px;">Please Enter Valid City</span>
+          <br>
+
+          <mat-form-field appearance="outline">
+            <mat-label>State</mat-label>
+            <input name="state" matInput placeholder="State" [(ngModel)]="user.state">
+          </mat-form-field>
+          <span *ngIf="errors.state!='' && errors.state!=undefined" style="color: red; font-size: 11px;">Please Enter Valid State</span>
+          <br>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Country</mat-label>
+            <input name="country" matInput placeholder="Country" [(ngModel)]="user.country">
+          </mat-form-field>
+          <span *ngIf="errors.country!='' && errors.country!=undefined" style="color: red; font-size: 11px;">Please Enter Valid Country</span>
+          <br>
+
+         
+          <mat-form-field appearance="outline">
+            <mat-label>Pin Code</mat-label>
+            <input name="pincode" matInput placeholder="Pin Code" [(ngModel)]="user.pincode">
+          </mat-form-field>
+          <span *ngIf="errors.pincode!='' && errors.pincode!=undefined" style="color: red; font-size: 11px;">Please Enter Valid PinCode</span>
+          <br>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Date of Joining</mat-label>
+            <input name="doj" matInput placeholder="Doj" type="date" [(ngModel)]="user.doj">
+          </mat-form-field>
+          <span *ngIf="errors.doj!='' && errors.doj!=undefined" style="color: red; font-size: 11px;">Please Enter Valid Date of Joining</span>
+        </div>
+        <button type="submit" mat-button class="addBtn">Add User</button>&nbsp;&nbsp;
+        <button type="reset" mat-button class="addBtn">reset</button>
+      </form>
+      
+  </mat-card>
+  <br> <br>

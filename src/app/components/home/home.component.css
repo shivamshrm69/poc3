@@ -1,0 +1,12 @@
+.homeDiv
+{
+margin: auto;
+margin-top: 200px;
+text-align: center;
+}
+.btn
+{
+    background-color: turquoise;
+    width: 100px;
+    color: black;
+}

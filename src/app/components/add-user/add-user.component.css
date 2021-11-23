@@ -1,0 +1,29 @@
+.form
+{
+    margin: auto;
+    width: 50%;
+    text-align: left;
+    margin-top: 5px;
+}
+
+.inputDiv mat-form-field
+{
+    font-size: 11px;
+    width: 300px;
+    font-weight: 500;
+}
+.mat-radio-button
+{
+    font-size: 14px;
+    transform: scale(0.85);
+   
+}
+.radioDiv
+{
+    text-align: left;
+    margin-left: 0px;;
+}
+.addBtn
+{
+    background-color:lightseagreen;
+}

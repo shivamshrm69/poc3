@@ -1,0 +1,220 @@
+<div class="viewDiv">
+  <h2 class="heading">Users</h2>
+  <mat-form-field appearance="outline" style="display: inline-block;max-width: 150px;font-size: 9px;font-weight: 600;margin-left: 450px;;">
+    <mat-label>Search</mat-label>
+    <input name="search" matInput placeholder="name or pincode" [(ngModel)]="search" (input)="filter()">
+  </mat-form-field>
+  <div class="col" style="display: inline">
+    <div ngbDropdown class="d-inline-block" style="margin-left: 0%;">
+      <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle style="font-size: 12px;">Order
+        By</button>
+      <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+
+        <button ngbDropdownItem (click)="OrderByDob()">Birth Date</button>
+        <button ngbDropdownItem (click)="OrderByDoj()">Joining Date</button>
+        <button ngbDropdownItem (click)="OrderByDobAndDoj()">Birth then Joining</button>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="data?.result.success!='No User Available';else noUser">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Email</th>
+          <th scope="col">Name</th>
+          <th scope="col">Mobile</th>
+          <th scope="col">DOB</th>
+          <th scope="col">DOJ</th>
+          <th scope="col">Country</th>
+          <th scope="col">State</th>
+          <th scope="col">City</th>
+          <th scope="col">Pin</th>
+          <th scope="col">Modify</th>
+          <th scope="col">Delete</th>
+        </tr>
+      </thead>
+
+      <tbody>
+
+        <tr *ngFor="let country of data?.result?.success">
+
+          <td>
+            {{ country.email }}
+          </td>
+          <td>
+            {{ country.first_name }} {{ country.middle_name }} {{ country.last_name }}
+          </td>
+          <td>
+            {{ country.mobile_no }}
+          </td>
+          <td>
+            {{ country.dob }}
+          </td>
+          <td>
+            {{ country.doj }}
+          </td>
+          <td>
+            {{ country.country }}
+          </td>
+          <td>
+            {{ country.state }}
+          </td>
+          <td>
+            {{ country.city }}
+          </td>
+          <td>
+            {{ country.pincode }}
+          </td>
+          <td>
+            <button type="button" mat-button class="editBtn" (click)="userById(country.user_id,content)">edit</button>
+          </td>
+          <td>
+            <a routerLink="/viewUsers"> <button type="button" mat-button class="deleteBtn"
+                (click)='deleteUser(country.user_id)'>delete</button></a>
+          </td>
+        </tr>
+
+      </tbody>
+
+    </table>
+  </div>
+  <ng-template #noUser>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Email</th>
+          <th scope="col">Name</th>
+          <th scope="col">Mobile</th>
+          <th scope="col">DOB</th>
+          <th scope="col">DOJ</th>
+          <th scope="col">Country</th>
+          <th scope="col">State</th>
+          <th scope="col">City</th>
+          <th scope="col">Pin</th>
+          <th scope="col">Modify</th>
+          <th scope="col">Delete</th>
+        </tr>
+      </thead>
+
+      <tbody>
+
+        <tr class="noUser">
+          <td class="mat-cell" colspan="9999">
+            No User Available
+          </td>
+        </tr>
+
+      </tbody>
+
+    </table>
+  </ng-template>
+
+
+  <ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">User update</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')"> </button>
+    </div>
+    <div class="modal-body" style="margin: auto; text-align: center;">
+      <form>
+        <div class="form-group">
+          <div class="inputDiv">
+            <mat-form-field appearance="outline">
+              <mat-label>Email</mat-label>
+              <input matInput placeholder="Email" name="email" [(ngModel)]="user.result.success.email">
+            </mat-form-field>
+
+            <br>
+
+            <mat-form-field appearance="outline">
+              <mat-label>First Name</mat-label>
+              <input name="first_name" matInput placeholder="First Name" [(ngModel)]="user.result.success.first_name">
+            </mat-form-field>
+
+            <br>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Middle Name</mat-label>
+              <input name="middle_name" matInput placeholder="Middle Name"
+                [(ngModel)]="user.result.success.middle_name">
+            </mat-form-field>
+
+            <br>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Last Name</mat-label>
+              <input name="last_name" matInput placeholder="Last Name" [(ngModel)]="user.result.success.last_name">
+            </mat-form-field>
+            <br>
+            <div class="radioDiv">
+              <mat-radio-group name="gender" [value]="userEdit.gender">
+                <label>Gender</label>&nbsp;
+                <mat-radio-button value="male" [checked]="user.result.success.gender=='male'?true:false">Male
+                </mat-radio-button>&nbsp;
+                <mat-radio-button value="female" [checked]="user.result.success.gender=='female'?true:false">Female
+                </mat-radio-button>
+              </mat-radio-group>
+            </div>
+
+            <br>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Date of Birth</mat-label>
+              <input name="dob" matInput placeholder="Dob" type="date" [(ngModel)]="user.result.success.dob">
+            </mat-form-field>
+            <br>
+            <mat-form-field appearance="outline">
+              <mat-label>Phone</mat-label>
+              <input name="mobile_no" matInput placeholder="Phone" [(ngModel)]="user.result.success.mobile_no">
+            </mat-form-field>
+
+            <br>
+
+            <mat-form-field appearance="outline">
+              <mat-label>City</mat-label>
+              <input name="city" matInput placeholder="City" [(ngModel)]="user.result.success.city">
+            </mat-form-field>
+
+            <br>
+
+            <mat-form-field appearance="outline">
+              <mat-label>State</mat-label>
+              <input name="state" matInput placeholder="State" [(ngModel)]="user.result.success.state">
+            </mat-form-field>
+
+            <br>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Country</mat-label>
+              <input name="country" matInput placeholder="Country" [(ngModel)]="user.result.success.country">
+            </mat-form-field>
+
+            <br>
+
+
+            <mat-form-field appearance="outline">
+              <mat-label>Pin Code</mat-label>
+              <input name="pincode" matInput placeholder="Pin Code" [(ngModel)]="user.result.success.pincode">
+            </mat-form-field>
+
+            <br>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Date of Joining</mat-label>
+              <input name="doj" matInput placeholder="Doj" type="date" [(ngModel)]="user.result.success.doj">
+            </mat-form-field>
+
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cancel</button>
+      <button type="button" class="btn btn-outline-dark" (click)="updateUser()">Update</button>
+    </div>
+  </ng-template>
+
+
+  <hr>
+
+</div>
