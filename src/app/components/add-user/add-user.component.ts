@@ -39,9 +39,9 @@ export class AddUserComponent implements OnInit {
     pincode: ""
 
   }
-  constructor(private userService: UserService, private _snackBar: MatSnackBar) { }
+  constructor(private userService: UserService, private snackBar: MatSnackBar) { }
   openSnackBar(message: string, action: string) {
-    this._snackBar.open(message, action);
+    this.snackBar.open(message, action);
   }
 
   ngOnInit(): void {

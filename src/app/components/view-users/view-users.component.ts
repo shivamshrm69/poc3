@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { UserService } from 'src/app/service/user.service';
 import Swal from 'sweetalert2';
@@ -10,9 +11,34 @@ import Swal from 'sweetalert2';
 })
 export class ViewUsersComponent implements OnInit {
   search = "";
-  constructor(private userService: UserService, private modalService: NgbModal) { }
+  constructor(private userService: UserService, private modalService: NgbModal,private snackBar: MatSnackBar) { }
   data: any;
   user: any;
+  horizontalPosition: MatSnackBarHorizontalPosition = 'start';
+  verticalPosition: MatSnackBarVerticalPosition = 'bottom';
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      horizontalPosition: this.horizontalPosition,
+      verticalPosition: this.verticalPosition,
+    });
+    
+  }
+
+  errors =
+    {
+      city: "",
+      country: "",
+      email: "",
+      first_name: "",
+      middle_name: "",
+      gender: "",
+      last_name: "",
+      dob: "",
+      doj: "",
+      mobile_no: "",
+      pincode: "",
+      state: ""
+    }
   userEdit = {
     user_id: "",
     first_name: "",
@@ -66,7 +92,7 @@ export class ViewUsersComponent implements OnInit {
     )
   }
   open(content: any) {
-    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', backdrop:"static" }).result.then((result) => {
     });
   }
 
@@ -97,9 +123,31 @@ export class ViewUsersComponent implements OnInit {
     this.userEdit.country = this.user.result.success.country
     this.userEdit.pincode = this.user.result.success.pincode
     this.userEdit.gender = this.user.result.success.gender
+
+
     this.userService.updateUser(this.userEdit).subscribe(
       response => {
         console.log(response)
+        let res: any = response;
+
+        if (res.success == false) {
+          this.openSnackBar('Error', 'Ok');
+          this.errors.last_name = res.result.error.last_name
+          this.errors.first_name = res.result.error.first_name
+          this.errors.middle_name = res.result.error.middle_name
+          this.errors.city = res.result.error.city
+          this.errors.country = res.result.error.country
+          this.errors.state = res.result.error.state
+          this.errors.pincode = res.result.error.pincode
+          this.errors.gender = res.result.error.gender
+          this.errors.mobile_no = res.result.error.mobile_no
+          this.errors.doj = res.result.error.doj
+          this.errors.dob = res.result.error.dob
+          this.errors.email = res.result.error.email
+          
+        }else
+        {
+        
         this.ngOnInit();
         this.modalService.dismissAll();
         Swal.fire(
@@ -107,7 +155,7 @@ export class ViewUsersComponent implements OnInit {
           'User Updated Successfully!',
           'success'
         )
-      },
+      }},
       error => {
         console.log(error)
       }
@@ -165,5 +213,23 @@ export class ViewUsersComponent implements OnInit {
       )
     }
 
+  }
+  clear()
+  {
+    this.errors =
+    {
+      city: "",
+      country: "",
+      email: "",
+      first_name: "",
+      middle_name: "",
+      gender: "",
+      last_name: "",
+      dob: "",
+      doj: "",
+      mobile_no: "",
+      pincode: "",
+      state: ""
+    }
   }
 }

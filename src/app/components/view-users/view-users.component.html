@@ -113,9 +113,10 @@
   <ng-template #content let-modal>
     <div class="modal-header">
       <h4 class="modal-title" id="modal-basic-title">User update</h4>
-      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')"> </button>
+      <button type="button" class="close" aria-label="Close" (click)="[modal.dismiss('Cross click'),clear()]" style="font-weight: bold; font-size:14px;">x</button>
     </div>
     <div class="modal-body" style="margin: auto; text-align: center;">
+      <mat-card class="form">
       <form>
         <div class="form-group">
           <div class="inputDiv">
@@ -123,14 +124,14 @@
               <mat-label>Email</mat-label>
               <input matInput placeholder="Email" name="email" [(ngModel)]="user.result.success.email">
             </mat-form-field>
-
+            <span *ngIf="errors.email!='' && errors.email!=undefined" class="errorSpan">Please Enter Valid Email</span>
             <br>
 
             <mat-form-field appearance="outline">
               <mat-label>First Name</mat-label>
               <input name="first_name" matInput placeholder="First Name" [(ngModel)]="user.result.success.first_name">
             </mat-form-field>
-
+            <span *ngIf="errors.first_name!='' && errors.first_name!=undefined" class="errorSpan">Please Enter Valid First Name</span>
             <br>
 
             <mat-form-field appearance="outline">
@@ -138,13 +139,14 @@
               <input name="middle_name" matInput placeholder="Middle Name"
                 [(ngModel)]="user.result.success.middle_name">
             </mat-form-field>
-
+            <span *ngIf="errors.middle_name!='' && errors.middle_name!=undefined" class="errorSpan">Please Enter Valid Middle Name</span>
             <br>
 
             <mat-form-field appearance="outline">
               <mat-label>Last Name</mat-label>
               <input name="last_name" matInput placeholder="Last Name" [(ngModel)]="user.result.success.last_name">
             </mat-form-field>
+            <span *ngIf="errors.last_name!='' && errors.last_name!=undefined" class="errorSpan">Please Enter Valid Last Name</span>
             <br>
             <div class="radioDiv">
               <mat-radio-group name="gender" [value]="userEdit.gender">
@@ -155,40 +157,41 @@
                 </mat-radio-button>
               </mat-radio-group>
             </div>
-
+            <span *ngIf="errors.gender!='' && errors.gender!=undefined" class="errorSpan">Please Select Gender</span>
             <br>
 
             <mat-form-field appearance="outline">
               <mat-label>Date of Birth</mat-label>
               <input name="dob" matInput placeholder="Dob" type="date" [(ngModel)]="user.result.success.dob">
             </mat-form-field>
+            <span *ngIf="errors.dob!='' && errors.dob!=undefined" class="errorSpan">Select Valid Date of Birth</span>
             <br>
             <mat-form-field appearance="outline">
               <mat-label>Phone</mat-label>
               <input name="mobile_no" matInput placeholder="Phone" [(ngModel)]="user.result.success.mobile_no">
             </mat-form-field>
-
+            <span *ngIf="errors.mobile_no!='' && errors.mobile_no!=undefined" class="errorSpan">Please Enter Valid Mobile No.</span>
             <br>
 
             <mat-form-field appearance="outline">
               <mat-label>City</mat-label>
               <input name="city" matInput placeholder="City" [(ngModel)]="user.result.success.city">
             </mat-form-field>
-
+            <span *ngIf="errors.city!='' && errors.city!=undefined" class="errorSpan">Please Enter Valid City</span>
             <br>
 
             <mat-form-field appearance="outline">
               <mat-label>State</mat-label>
               <input name="state" matInput placeholder="State" [(ngModel)]="user.result.success.state">
             </mat-form-field>
-
+            <span *ngIf="errors.state!='' && errors.state!=undefined" class="errorSpan">Please Enter Valid State</span>
             <br>
 
             <mat-form-field appearance="outline">
               <mat-label>Country</mat-label>
               <input name="country" matInput placeholder="Country" [(ngModel)]="user.result.success.country">
             </mat-form-field>
-
+            <span *ngIf="errors.country!='' && errors.country!=undefined" class="errorSpan">Please Enter Valid Country</span>
             <br>
 
 
@@ -196,20 +199,21 @@
               <mat-label>Pin Code</mat-label>
               <input name="pincode" matInput placeholder="Pin Code" [(ngModel)]="user.result.success.pincode">
             </mat-form-field>
-
+            <span *ngIf="errors.pincode!='' && errors.pincode!=undefined" class="errorSpan">Please Enter Valid PinCode</span>
             <br>
 
             <mat-form-field appearance="outline">
               <mat-label>Date of Joining</mat-label>
               <input name="doj" matInput placeholder="Doj" type="date" [(ngModel)]="user.result.success.doj">
             </mat-form-field>
-
+            <span *ngIf="errors.doj!='' && errors.doj!=undefined" class="errorSpan">Please Enter Valid Date of Joining</span>
           </div>
         </div>
       </form>
+      </mat-card>
     </div>
     <div class="modal-footer">
-      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cancel</button>
+      <button type="button" class="btn btn-outline-dark" (click)="[modal.close('Save click'),clear()]">Cancel</button>
       <button type="button" class="btn btn-outline-dark" (click)="updateUser()">Update</button>
     </div>
   </ng-template>
